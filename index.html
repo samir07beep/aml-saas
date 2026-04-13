@@ -225,6 +225,17 @@ button:hover {
 </div>
 
 <script>
+function showModal() {
+  const modal = document.getElementById("confirmationModal");
+  modal.style.display = "flex"; // important because you use flex centering
+}
+
+function closeModal() {
+  const modal = document.getElementById("confirmationModal");
+  modal.style.display = "none";
+}
+
+  
 async function connect() {
   const status = document.getElementById("status");
   status.innerText = "Connecting to exchange...";
