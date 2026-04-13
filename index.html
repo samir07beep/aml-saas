@@ -163,10 +163,16 @@ button:hover {
     <label>API Secret</label>
     <input id="apiSecret" type="password" placeholder="Enter your API Secret" />
    
-    <label>Passphrase</label>
-    <input id="apiPhrase" type="password" placeholder="Enter your Passphrase if provided" />
-
-    
+   <label for="apiPhrase" class="form-label">Passphrase (Optional)</label>
+<input
+  id="apiPhrase"
+  name="apiPhrase"
+  type="password"
+  class="form-control"
+  placeholder="Enter your Passphrase (if applicable)"
+  aria-label="Passphrase"
+  aria-required="false"
+/>
     <button onclick="connect()">Verify & Connect</button>
 
     <div class="status" id="status"></div>
