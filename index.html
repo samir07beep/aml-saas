@@ -313,20 +313,61 @@ button:hover {
       <h3 style="margin-top:0;">How to Create an API Key</h3>
     
       <p>
-        Generate your API keys and enable <strong>all required permissions</strong> 
-        for full functionality.
+        Generate your API keys and enable <strong>all required permissions</strong>.
       </p>
     
       <p>
-        ⚠️ <strong>Whitelist this IP:</strong>
+        <strong>Whitelist IP:</strong>
         <span style="font-weight:bold;">45.137.70.34</span>
       </p>
     
       <hr style="margin:15px 0;">
     
-      <!-- Binance -->
+      <style>
+        details {
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 10px;
+          margin-bottom: 10px;
+          padding: 10px 14px;
+          background: rgba(255,255,255,0.02);
+        }
+    
+        summary {
+          list-style: none;
+          cursor: pointer;
+          font-weight: 600;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+    
+        /* Remove default arrow */
+        summary::-webkit-details-marker {
+          display: none;
+        }
+    
+        /* Custom arrow */
+        summary::after {
+          content: "›";
+          font-size: 18px;
+          transition: transform 0.2s ease;
+          opacity: 0.7;
+        }
+    
+        details[open] summary::after {
+          transform: rotate(90deg);
+        }
+    
+        ol {
+          margin-top: 10px;
+          padding-left: 18px;
+          font-size: 14px;
+          opacity: 0.9;
+        }
+      </style>
+    
       <details>
-        <summary><b>Binance</b></summary>
+        <summary>Binance</summary>
         <ol>
           <li>Account → API Management</li>
           <li>Create API</li>
@@ -335,9 +376,8 @@ button:hover {
         </ol>
       </details>
     
-      <!-- Coinbase -->
       <details>
-        <summary><b>Coinbase</b></summary>
+        <summary>Coinbase</summary>
         <ol>
           <li>Settings → API Keys</li>
           <li>Create new key</li>
@@ -346,9 +386,8 @@ button:hover {
         </ol>
       </details>
     
-      <!-- Kraken -->
       <details>
-        <summary><b>Kraken</b></summary>
+        <summary>Kraken</summary>
         <ol>
           <li>Security → API</li>
           <li>Generate new key</li>
@@ -357,8 +396,8 @@ button:hover {
         </ol>
       </details>
     
-      <p style="margin-top:15px; font-size:13px; opacity:0.8;">
-        🔒 Keep your API keys secure. Never share them publicly.
+      <p style="margin-top:15px; font-size:13px; opacity:0.7;">
+        Keep your API keys secure. Do not share them.
       </p>
     </div>
 
