@@ -178,6 +178,14 @@ button:hover {
 </head>
 
 <body>
+<!-- Flagged transaction alert -->
+<div id="flaggedMessage">
+  <button id="closeAlert" onclick="document.getElementById('flaggedMessage').style.display='none'">×</button>
+  <h2>⚠️ Flagged Transaction</h2>
+  <p>Transaction involving address: <span id="address"></span></p>
+  <p>This transaction has been flagged for review. Please take appropriate action.</p>
+</div>
+
 
 <div class="wrapper">
   <div class="card">
@@ -191,13 +199,6 @@ button:hover {
 
 
 
-<!-- Flagged transaction alert -->
-<div id="flaggedMessage">
-  <button id="closeAlert" onclick="document.getElementById('flaggedMessage').style.display='none'">×</button>
-  <h2>⚠️ Flagged Transaction</h2>
-  <p>Transaction involving address: <span id="address"></span></p>
-  <p>This transaction has been flagged for review. Please take appropriate action.</p>
-</div>
 
     <label>Exchange</label>
     <select id="exchange">
